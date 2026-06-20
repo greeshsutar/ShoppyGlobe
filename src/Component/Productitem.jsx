@@ -1,14 +1,19 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./utils/Slice";
 import { Link } from "react-router-dom";
 
 const Productitem = ({ fetchdata, datafilter }) => {
   let data = datafilter.length > 0 ? datafilter : fetchdata;
 
-  const dispatchaction = useDispatch();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const isInCart = (id) => {
+    return cartItems.some(item => item.id === id);
+  };
 
   function handleclick(elem) {
-    dispatchaction(addItem(elem));
+    dispatch(addItem(elem));
   }
 
   if (!data || data.length === 0) {
@@ -22,7 +27,6 @@ const Productitem = ({ fetchdata, datafilter }) => {
           key={elem.id}
           className="w-60 border rounded-xl shadow-md p-3 hover:scale-105 transition"
         >
-          {/* Clickable card */}
           <Link to={`/products/${elem.id}`}>
             <img
               src={elem.thumbnail}
@@ -33,18 +37,22 @@ const Productitem = ({ fetchdata, datafilter }) => {
             <h3 className="font-semibold mt-2">{elem.title}</h3>
 
             <p className="text-green-600 font-bold">
-              ₹ {Math.ceil(elem.price * 100)}
+              ₹ {Math.ceil(elem.price * 80)}
             </p>
 
             <p className="text-yellow-500">⭐ {elem.rating}</p>
           </Link>
 
-          {/* Button outside Link */}
           <button
             onClick={() => handleclick(elem)}
-            className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+            disabled={isInCart(elem.id)}
+            className={`mt-2 px-3 py-1 rounded ${
+              isInCart(elem.id)
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 text-white"
+            }`}
           >
-            Add to Cart
+            {isInCart(elem.id) ? "Added" : "Add to Cart"}
           </button>
         </div>
       ))}

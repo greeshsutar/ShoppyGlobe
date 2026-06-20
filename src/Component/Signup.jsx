@@ -50,8 +50,9 @@ const Signup = () => {
       } else {
         setmsg(result.msg);
       }
-    } catch (err) {
+    } catch (e) {
       setmsg("Something went wrong");
+      void e;
     }
   }
 
@@ -109,7 +110,7 @@ const Signup = () => {
             value={data.password}
             onChange={handlechange}
             placeholder="Password"
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border rounded"   
           />
 
           {/* Button */}

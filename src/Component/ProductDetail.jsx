@@ -13,8 +13,9 @@ const [error, setError] = useState(null);
     try {
       const res = await axios.get(`https://dummyjson.com/products/${id}`);
       setProduct(res.data);
-    } catch (err) {
+    } catch (e) {
       setError("Failed to fetch product");
+      void e;
     } finally {
       setLoading(false);
     }
