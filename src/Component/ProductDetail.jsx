@@ -1,38 +1,11 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// NOTE:
+// This file is NOT used by routing (see src/pages/ProductDetail.jsx + src/main.jsx).
+// Keeping a non-responsive duplicate component here can confuse maintenance.
+//
+// If you still need a standalone ProductDetail component, import the real one:
+//   export { default } from "../pages/ProductDetail";
+//
+// For now, we simply re-export the routed responsive page component.
 
-export default function ProductDetail(){
-  const { id } = useParams();
+export { default } from "../pages/ProductDetail";
 
-  const [product, setProduct] = useState(null);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
-  useEffect(() => {
-  async function fetchProduct() {
-    try {
-      const res = await axios.get(`https://dummyjson.com/products/${id}`);
-      setProduct(res.data);
-    } catch (e) {
-      setError("Failed to fetch product");
-      void e;
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  fetchProduct();
-}, [id]);
-
-if (loading) return <h2>Loading...</h2>;
-if (error) return <h2>{error}</h2>;
-  return (
-    <div>
-      <h1>{product.title}</h1>
-      <img src={product.thumbnail} />
-      <p>{product.description}</p>
-      <p>₹ {product.price}</p>
-
-    </div>
-  );
-};

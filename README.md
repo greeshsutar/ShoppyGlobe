@@ -1,16 +1,79 @@
-# React + Vite
+# ShoppyGlobe (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShoppyGlobe is a shopping web application built with **React**, **Vite**, **React Router**, and **Redux Toolkit**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Implemented (as per assignment)
 
-## React Compiler
+### Pages / Components
+- **App**: main layout + routing outlet
+- **Header**: navigation + cart icon/link
+- **ProductList**: fetches products and shows search-filtered list
+- **ProductItem**: renders a single product with **Add to Cart** button
+- **ProductDetail**: fetches product by route param
+- **Cart**: shows cart items, quantity controls, remove actions
+- **CartItem**: renders a single item in the cart
+- **Checkout**: dummy form + order summary; clicking **Place Order** shows **“Order placed”**, clears cart, and redirects home
+- **NotFound**: 404 page for unknown routes (with error details)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Data fetching & error handling
+- Products are fetched in **ProductList** via a custom hook (`useProducts`).
+- Product details are fetched in **ProductDetail** via `useEffect` using `useParams()`.
+- Failed fetch requests show a friendly error UI.
 
-## Expanding the ESLint configuration
+### State management (Redux)
+- Cart stored in Redux with actions for add/remove/increase/decrease/clear.
+- Product search term stored in Redux and used to filter results.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Routing
+- Uses **createBrowserRouter** and dynamic route params for product details.
+- Routes include: Home (`/`), Product Detail (`/products/:id`), Cart (`/cart`), Checkout (`/checkout`), and catch-all `*`.
+
+### Performance / Optimization
+- **React.lazy** + **Suspense** for page/component code splitting.
+- Lazy-loaded images using `loading="lazy"`.
+
+---
+
+## Live API used
+- `https://dummyjson.com/products` (and product detail endpoint `https://dummyjson.com/products/:id`)
+
+---
+
+## Setup
+
+### 1) Install dependencies
+```bash
+npm install
+```
+
+### 2) Run development server
+```bash
+npm run dev
+```
+
+### 3) Build for production
+```bash
+npm run build
+```
+
+### 4) Lint
+```bash
+npm run lint
+```
+
+---
+
+## Notes / References
+- `UPDATED.md` — implementation checklist & confirmation notes
+- `TODO.md` — remaining tasks (e.g., manual verification for mobile/tablet/desktop)
+
+---
+
+## Project structure (high level)
+- `src/pages/` — ProductList, ProductDetail, Cart, Checkout, NotFound
+- `src/components/` and `src/Component/` — reusable UI pieces (Header, ProductItem, CartItem, etc.)
+- `src/store/` — Redux slices, hooks, and store setup
+
+

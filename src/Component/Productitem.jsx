@@ -21,7 +21,7 @@ const Productitem = ({ fetchdata, datafilter }) => {
   }
 
   return (
-    <div className="flex flex-wrap gap-5 p-4">
+<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {data.map((elem) => (
         <div
           key={elem.id}

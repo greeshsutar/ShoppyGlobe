@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <div>
       {/* Search */}
-      <div className="relative flex-1 min-w-[200px] max-w-md mb-4">
+   <div className="relative w-full max-w-md mx-auto mb-4 px-4 sm:px-0">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
           🔍
         </span>

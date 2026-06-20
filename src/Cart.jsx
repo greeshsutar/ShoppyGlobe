@@ -17,13 +17,13 @@ const Cart = () => {
   }
 
   return (
-    <div className="p-6">
+<div className="p-4 sm:p-6 max-w-2xl mx-auto">
       <h1 className="text-xl font-bold mb-4">Cart Items</h1>
 
       {cartitems.map((item) => (
         <div
           key={item.id}
-          className="flex justify-between items-center border p-3 mb-3 rounded"
+         className="flex flex-wrap sm:flex-nowrap justify-between items-center border p-3 mb-3 rounded gap-3"
         >
           {/* Left */}
           <div>
