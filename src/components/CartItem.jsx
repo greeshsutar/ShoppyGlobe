@@ -15,7 +15,7 @@ export default function CartItem({ item }) {
           <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
         ) : (
           <div className="w-8 h-8 rounded-lg bg-slate-200" />
-        )}
+         )}
       </div>
 
       {/* Info */}
